@@ -1,0 +1,45 @@
+.layui-footer {
+ text-align: center;
+ font-size: 12px;
+}
+.iconfont{
+ margin-right: 8px;
+}
+.layui-icon{
+ margin-right: 8px;
+ margin-left: 20px;
+}
+iframe {
+ width: 100%;
+ height: 100%;
+}
+.userinfo {
+ height: 60px;
+ line-height: 60px;
+ text-align: center;
+ font-size: 12px;
+ user-select: none;
+ border-bottom: 1px solid black;
+}
+.userinfo img {
+ font-size: 0px;
+}
+.layui-nav-img {
+ width: 40px;
+ height: 40px;
+}
+.text-avatar{
+ display: inline-block;
+ margin-right: 5px;
+ width: 40px;
+ height: 40px;
+ line-height: 40px;
+ background-color: #419488;
+ border-radius: 50%;
+ text-align: center;
+ font-size: 20px;
+ color: #fff;
+ /* 文字头像几像素居中,所以加上相对定位往下挤4像素,同时相对定位还会占据元素原先的位置,不脱标*/
+ position: relative;
+ top: 4px;
+}

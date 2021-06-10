@@ -54,8 +54,13 @@
     }
    }else if(option.method=='GET'){
     // get请求
+
     urlStr=option.url+'?'+resolveData(option.data);
     xhr.open(option.method,urlStr,true);
+    if(option.hasOwnProperty('Header')){
+     // 添加额外的头部信息
+     xhr.setRequestHeader(Object.keys(option.Header)[0],option.Header[Object.keys(option.Header)[0]]);
+    }
     xhr.send();
    }
 
