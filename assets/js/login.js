@@ -105,7 +105,7 @@ regForm.addEventListener('submit',function(e){
  e.preventDefault(); // 阻止表单默认提交
  ajax({
   method:'post',
-  url:'http://api-breakingnews-web.itheima.net/api/reguser',
+  url:'http://www.liulongbin.top:3008/api/reg',
   data:{
    username:regBox.querySelector('[type="text"]').value,
    password:regBox.querySelector('[type="password"]').value
@@ -123,7 +123,7 @@ loginForm.addEventListener('submit',function(e){
  e.preventDefault();
  ajax({
   method:'post',
-  url:'http://api-breakingnews-web.itheima.net/api/login',
+  url:'http://www.liulongbin.top:3008/api/login',
   data:{
    username:loginBox.querySelector('[type="text"]').value,
    password:loginBox.querySelector('[type="password"]').value
@@ -131,7 +131,7 @@ loginForm.addEventListener('submit',function(e){
  },function(xhr){
   let response=JSON.parse(xhr.responseText);
   layer.msg(response.message);
-  if(response.status===0){
+  if(response.code===0){
    // 登录成功后,服务器会返回一个token字符串,可以用来以后访问有权限的数据
    // 所以需要把这个字符串保存到本地存储中,需要的时候去取
    localStorage.setItem('token',JSON.parse(xhr.responseText).token);

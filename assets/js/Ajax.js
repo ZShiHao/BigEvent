@@ -41,10 +41,15 @@
      }
     }
    })
+
    if(option.method=='post'){
     // post请求
     xhr.open(option.method,option.url,true);
     xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+    if(option.hasOwnProperty('Header')){
+     // 添加额外的头部信息
+     xhr.setRequestHeader(Object.keys(option.Header)[0],option.Header[Object.keys(option.Header)[0]]);
+    }
     if(typeof option.data==='string'){
      // 判断是否是通过表单收集的数据
      // send方法中的参数是要发送的请求报文主体
@@ -62,6 +67,21 @@
      xhr.setRequestHeader(Object.keys(option.Header)[0],option.Header[Object.keys(option.Header)[0]]);
     }
     xhr.send();
+   }else if(option.method==="PUT"){
+    // put方法
+    xhr.open(option.method,option.url,true);
+    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+    if(option.hasOwnProperty('Header')){
+     // 添加额外的头部信息
+     xhr.setRequestHeader(Object.keys(option.Header)[0],option.Header[Object.keys(option.Header)[0]]);
+    }
+    if(typeof option.data==='string'){
+     // 判断是否是通过表单收集的数据
+     // send方法中的参数是要发送的请求报文主体
+     xhr.send(option.data);
+    }else{
+     xhr.send(resolveData(option.data));
+    }
    }
 
   }

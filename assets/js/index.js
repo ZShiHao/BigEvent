@@ -8,7 +8,6 @@ window.addEventListener('load',function(){
    // 确定之后会执行这个回调函数
    layer.close(index);
    // 确认退出之后,会跳转会登录页面,然后删除本地存储中的token值
-   console.log(location.href);
    location.href='/login.html';
    localStorage.removeItem('token');
  });
@@ -23,14 +22,13 @@ window.addEventListener('load',function(){
 function getUserInfo(){
  ajax({
   method:'GET',
-  url:'http://api-breakingnews-web.itheima.net/my/userinfo',
+  url:'http://www.liulongbin.top:3008/my/userinfo',
   Header:{
    Authorization:localStorage.getItem('token')||'',
   }
  },function(xhr){
-  console.log(xhr);
   let response=JSON.parse(xhr.responseText);
-  if(response.status!==0){
+  if(response.code!==0){
    layui.layer.msg('获取用户信息失败');
    // 若果获取用户信息失败,证明用户token值是错误的,然后强制跳转会登录页面
    location.href='/login.html'
