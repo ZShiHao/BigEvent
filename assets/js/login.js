@@ -130,13 +130,14 @@ loginForm.addEventListener('submit',function(e){
   }
  },function(xhr){
   let response=JSON.parse(xhr.responseText);
-  layer.msg(response.message);
   if(response.code===0){
    // 登录成功后,服务器会返回一个token字符串,可以用来以后访问有权限的数据
    // 所以需要把这个字符串保存到本地存储中,需要的时候去取
    localStorage.setItem('token',JSON.parse(xhr.responseText).token);
    // 登录成功后,跳转到后台的主页
    location.href='index.html';
+  }else{
+   layer.msg(response.message);
   }
  })
 })

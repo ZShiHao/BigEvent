@@ -47,7 +47,7 @@ function getUserInfo(){
 function renderAvatar(userData){
 
  let welcome=document.querySelector('#welcome');
- welcome.innerText+=userData.nickname||userData.username; //优先选nickname昵称,不存在再选择用户名
+ welcome.innerText="欢迎, "+userData.nickname||userData.username; //优先选nickname昵称,不存在再选择用户名
 
  let sideAva=document.querySelector('.userinfo img');
  let textSideAva=document.querySelector('.userinfo .text-avatar');
@@ -55,7 +55,7 @@ function renderAvatar(userData){
  let textHeadAva=document.querySelector('.layui-nav .text-avatar');
 
  if(userData.user_pic===null){
-  let nameChar=userData.username[0].toUpperCase();
+  let nameChar=(userData.nickname||userData.username)[0].toUpperCase();
   // 渲染文本头像
   textSideAva.style.display='inline-block';
   textSideAva.innerText=nameChar;
@@ -67,9 +67,9 @@ function renderAvatar(userData){
   // 渲染用户头像
   textSideAva.style.display='none';
   textHeadAva.style.display='none';
-  sideAva.style.display='block';
+  sideAva.style.display='inline-block';
   sideAva.src=userData.user_pic;
-  headAva.style.display='block';
+  headAva.style.display='inline-block';
   headAva.src=userData.user_pic;
  }
 

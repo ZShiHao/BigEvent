@@ -6,7 +6,7 @@
   function resolveData(data){
    let arr=[];
    for(let key in data){
-    arr.push(`${key}=${data[key]}`);
+    arr.push(`${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`);
    }
    return arr.join('&');
   }
@@ -20,7 +20,7 @@
    xhr.addEventListener('load',function(){
     // tips:xhr.status中的status指的是http的状态码
     // 服务器返回的信息中的response.status是后台自己定义的状态码
-    if(this.readyState===4&&this.status===200){
+    if(this.readyState===4){
      let response=JSON.parse(this.responseText);
      switch (response.status){
       //判断收到的信息,如果操作成功,再渲染页面
@@ -69,6 +69,21 @@
     xhr.send();
    }else if(option.method==="PUT"){
     // put方法
+    xhr.open(option.method,option.url,true);
+    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+    if(option.hasOwnProperty('Header')){
+     // 添加额外的头部信息
+     xhr.setRequestHeader(Object.keys(option.Header)[0],option.Header[Object.keys(option.Header)[0]]);
+    }
+    if(typeof option.data==='string'){
+     // 判断是否是通过表单收集的数据
+     // send方法中的参数是要发送的请求报文主体
+     xhr.send(option.data);
+    }else{
+     xhr.send(resolveData(option.data));
+    }
+   }else if(option.method==='PATCH'){
+    // patch方法
     xhr.open(option.method,option.url,true);
     xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
     if(option.hasOwnProperty('Header')){

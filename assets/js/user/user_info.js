@@ -1,5 +1,6 @@
 window.addEventListener('load',function(){
 
+ console.log(window);
  const nickName=document.querySelector('input[name="nickname"]');
  const email=document.querySelector('input[name="email"]');
  const form=document.querySelector('form');
@@ -24,8 +25,14 @@ window.addEventListener('load',function(){
     email:email.value
    }
   },function(xhr){
-   console.log(xhr.responseText);
-   getUserInfo();
+   let response=JSON.parse(xhr.responseText);
+
+   // 如果用户信息修改成功,则重新渲染表单,同时重新渲染index主页的头像个人信息
+   if(response.code===0){
+    getUserInfo();
+    // 调用父页面的getUserInfo方法,更新index页面中头像的信息
+    window.parent.getUserInfo();
+   }
   })
  })
 
@@ -52,7 +59,8 @@ function getUserInfo(){
   }
  },function(xhr){
   let response=JSON.parse(xhr.responseText);
-  if(response.status===0){
+  if(response.code===0){
+   // 获取用户信息成功后,将信息渲染到表单中
    let userName=document.querySelector('input[name="username"]');
    let nickName=document.querySelector('input[name="nickname"]');
    let email=document.querySelector('input[name="email"]');

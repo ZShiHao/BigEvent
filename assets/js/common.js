@@ -43,7 +43,7 @@
    return true;
   }
 
-  let timer
+  let timer;
   /**
    * 将错误信息渲染到页面上
    * @param {String,Object} text 提示用户输入的错误信息 
